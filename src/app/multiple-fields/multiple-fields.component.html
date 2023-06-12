@@ -1,0 +1,22 @@
+<h3>Address Validator (multiple fields)</h3>
+<small>If postcode starts with '10' then it must be 'Amsterdam'</small>
+<form (ngSubmit)="save()" [formGroup]="postalCodeForm">
+  <div class="form-group">
+    <input type="text" id="inputPost" formControlName="postalCode" placeholder="postal code" class="form-control">
+  </div>
+
+  <div class="form-text text-danger mb-2" *ngIf="touched">
+    <div *ngIf="postalCodeForm.hasError('address')">
+      City must be "{{ postalCodeForm.getError('address').expectedCity }}" 
+      with postal digits starting with 
+      "{{ postalCodeForm.getError('address').firstTwoPostalDigits }}"
+    </div>
+  </div>
+
+  <div class="form-group">
+    <input type="text" id="inputCity" formControlName="city" placeholder="city" class="form-control">
+  </div>
+
+  <button [disabled]="postalCodeForm.invalid" class="btn btn-primary mb-2">Save</button>
+</form>
+

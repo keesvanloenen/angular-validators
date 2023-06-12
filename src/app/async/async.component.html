@@ -1,0 +1,25 @@
+<h3>Async Validator</h3>
+<small>
+  Calls UserService which mimicks retrieving data from API<br>
+  Given usernames are: 'bert93', 'bobo', 'els89'
+</small>
+
+<form (ngSubmit)="save()" [formGroup]="userForm">
+  <input id="inputUsername" class="form-control" formControlName="username" placeholder="New username">
+
+  <div *ngIf="userForm.controls.username.hasError('usedBy')">
+    <div class="form-text text-danger mb-2">
+      Username is already taken by "{{userForm.controls.username.getError("usedBy").existing.name }}"
+    </div>
+  </div>
+
+  <button [disabled]="!userForm.valid" type="submit" class="btn btn-primary mb-2">
+    <span
+      *ngIf="userForm.pending"
+      class="spinner-border spinner-border-sm"
+    ></span>
+    Add
+  </button>
+</form>
+
+

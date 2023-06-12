@@ -1,0 +1,17 @@
+<h3>Forbid Validator (multiple fields)</h3>
+<small>Forbidden postal codes are: '1012NX' and '1012PA'</small>
+
+<form (ngSubmit)="save()" [formGroup]="postalCodeForm">
+  <div class="form-group">
+    <input type="text" formControlName="postalCode" placeholder="postal code" class="form-control">
+  </div>
+
+  <div *ngIf="postalCodeForm.controls.postalCode.hasError('forbid')">
+    <div class="form-text text-danger mb-2">
+      The following values are invalid: 
+      {{postalCodeForm.controls.postalCode.getError("forbid").forbidden.join(', ') }}
+    </div>
+  </div>
+
+  <button [disabled]="postalCodeForm.invalid" class="btn btn-primary mb-2">Save</button>
+</form>
